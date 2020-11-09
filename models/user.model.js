@@ -34,3 +34,14 @@ exports.createUser = (data) => {
 exports.findAll = () => {
   return UserModel.find();
 };
+
+exports.findByEmail = (email) => {
+  return UserModel.findOne({ email: email })
+    .exec()
+    .then((user) => {
+      return user;
+    })
+    .catch(() => {
+      return null;
+    });
+};
