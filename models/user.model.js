@@ -1,24 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const ItemSchema = new Schema({
-    title: {
-        type: String,
-        default: ""
-    },
-    quantity:{
-        type: Number,
-        default: 0
-    },
-    description:{
-        type: String,
-        default: ""
-    },
-    image:{
-        type: String,
-        default: ""
-    }
+const UserSchema = new Schema({
+  firstName: {
+    type: String,
+    default: "",
+  },
+  lastName: {
+    type: String,
+    default: "",
+  },
+  email: {
+    type: String,
+    default: "",
+  },
+  password: {
+    type: String,
+    default: "",
+  },
 });
 
-exports.Item = mongoose.model('Item', ItemSchema);
+const UserModel = mongoose.model("users", UserSchema);
+
+exports.createUser = (data) => {
+  const user = new UserModel(data);
+  return user.save();
+};
+
+exports.findAll = () => {
+  return UserModel.find();
+};
