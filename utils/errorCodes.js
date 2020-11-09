@@ -27,6 +27,10 @@ const codes = {
     code: 26,
     message: "Token missing!",
   },
+  27: {
+    code: 26,
+    message: "User already registered!",
+  },
 };
 
 exports.generateError = (code) => {

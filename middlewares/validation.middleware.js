@@ -6,6 +6,7 @@ const ErrorCodes = require("../utils/errorCodes");
 exports.validateLogin = (req, res, next) => {
   if (req.body.email && req.body.password) {
     UserModel.findByEmail(req.body.email).then((user) => {
+      console.log(user);
       if (user) {
         const passwordFields = user.password.split("$");
         const salt = passwordFields[0];
@@ -26,24 +27,29 @@ exports.validateLogin = (req, res, next) => {
           return res.status(400).json(ErrorCodes.generateError(20));
         }
       } else {
-        res.status(404).json(ErrorCodes.generateError(24));
+        return res.status(400).json(ErrorCodes.generateError(23));
       }
     });
-    return next();
   } else {
-    res.status(400).json("missing required fields");
+    res.status(400).json(ErrorCodes.generateError(24));
   }
 };
 
 exports.validateRegister = (req, res, next) => {
   if (req.body.email && req.body.password) {
-    const salt = crypto.randomBytes(16).toString("base64");
-    const hash = crypto
-      .createHmac("sha512", salt)
-      .update(req.body.password)
-      .digest("base64");
-    req.body.password = salt + "$" + hash;
-    return next();
+    UserModel.findByEmail(req.body.email).then((user) => {
+      if (user) {
+        res.status(400).json(ErrorCodes.generateError(27));
+      } else {
+        const salt = crypto.randomBytes(16).toString("base64");
+        const hash = crypto
+          .createHmac("sha512", salt)
+          .update(req.body.password)
+          .digest("base64");
+        req.body.password = salt + "$" + hash;
+        return next();
+      }
+    });
   } else {
     res.status(400).json(ErrorCodes.generateError(24));
   }
