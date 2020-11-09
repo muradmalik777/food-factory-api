@@ -1,5 +1,6 @@
 const UserModel = require("../models/user.model");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 
 exports.validateLogin = (req, res, next) => {
   if (req.body.email && req.body.password) {
@@ -51,7 +52,23 @@ exports.validateRegister = (req, res, next) => {
 
 exports.validateRole = (req, res, next) => {};
 
-exports.validateJWT = (req, res, next) => {};
+exports.validateJWT = (req, res, next) => {
+  if (req.headers["authorization"]) {
+    try {
+      const authorization = req.headers["authorization"].split(" ");
+      if (authorization[0] !== "Bearer") {
+        return res.status(401).send();
+      } else {
+        req.jwt = jwt.verify(authorization[1], process.env.JWT_SECRET);
+        return next();
+      }
+    } catch (err) {
+      return res.status(403).send();
+    }
+  } else {
+    return res.status(401).send();
+  }
+};
 
 exports.createJWT = (req, res, next) => {};
 
