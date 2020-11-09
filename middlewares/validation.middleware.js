@@ -1,6 +1,7 @@
 const UserModel = require("../models/user.model");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const ErrorCodes = require("../utils/errorCodes");
 
 exports.validateLogin = (req, res, next) => {
   if (req.body.email && req.body.password) {
@@ -22,12 +23,10 @@ exports.validateLogin = (req, res, next) => {
           };
           return next();
         } else {
-          return res
-            .status(400)
-            .send({ errors: ["Invalid email or password"] });
+          return res.status(400).json(ErrorCodes.generateError(20));
         }
       } else {
-        res.status(404).json("Missing required fields");
+        res.status(404).json(ErrorCodes.generateError(24));
       }
     });
     return next();
@@ -46,7 +45,7 @@ exports.validateRegister = (req, res, next) => {
     req.body.password = salt + "$" + hash;
     return next();
   } else {
-    res.status(400).json("missing required fields");
+    res.status(400).json(ErrorCodes.generateError(24));
   }
 };
 
@@ -57,10 +56,13 @@ exports.validateJWT = (req, res, next) => {
     try {
       const authorization = req.headers["authorization"].split(" ");
       if (authorization[0] !== "Bearer") {
-        return res.status(401).send();
+        return res.status(401).send(ErrorCodes.generateError(26));
       } else {
         req.jwt = jwt.verify(authorization[1], process.env.JWT_SECRET);
-        return next();
+        if (jwt.userId) {
+          return next();
+        }
+        res.status(400).json(ErrorCodes.generateError(25));
       }
     } catch (err) {
       return res.status(403).send();
