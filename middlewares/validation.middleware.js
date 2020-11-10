@@ -65,10 +65,11 @@ exports.validateJWT = (req, res, next) => {
         return res.status(401).send(ErrorCodes.generateError(26));
       } else {
         req.jwt = jwt.verify(authorization[1], process.env.JWT_SECRET);
-        if (jwt.userId) {
+        if (req.jwt.userId) {
           return next();
+        } else {
+          res.status(400).json(ErrorCodes.generateError(25));
         }
-        res.status(400).json(ErrorCodes.generateError(25));
       }
     } catch (err) {
       return res.status(403).send();
@@ -77,7 +78,3 @@ exports.validateJWT = (req, res, next) => {
     return res.status(401).send();
   }
 };
-
-exports.createJWT = (req, res, next) => {};
-
-const createToken = () => {};
