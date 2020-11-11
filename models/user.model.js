@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  firstName: {
-    type: String,
-    default: "",
-  },
-  lastName: {
+  name: {
     type: String,
     default: "",
   },
   email: {
+    type: String,
+    default: "",
+  },
+  department: {
     type: String,
     default: "",
   },
@@ -37,6 +37,17 @@ exports.findAll = () => {
 
 exports.findByEmail = (email) => {
   return UserModel.findOne({ email: email })
+    .exec()
+    .then((user) => {
+      return user;
+    })
+    .catch(() => {
+      return null;
+    });
+};
+
+exports.findById = (userId) => {
+  return UserModel.findOne({ _id: userId })
     .exec()
     .then((user) => {
       return user;

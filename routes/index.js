@@ -4,7 +4,9 @@ const UserController = require("../controllers/user.controller");
 const ValidationMiddleware = require("../middlewares/validation.middleware");
 const AuthController = require("../controllers/auth.controller");
 
-router.route("/user/:userId").get([UserController.get]);
+router
+  .route("/user/:userId")
+  .get([ValidationMiddleware.validateJWT, UserController.get]);
 router
   .route("/login")
   .post([ValidationMiddleware.validateLogin, AuthController.login]);

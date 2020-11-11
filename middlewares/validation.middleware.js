@@ -6,7 +6,6 @@ const ErrorCodes = require("../utils/errorCodes");
 exports.validateLogin = (req, res, next) => {
   if (req.body.email && req.body.password) {
     UserModel.findByEmail(req.body.email).then((user) => {
-      console.log(user);
       if (user) {
         const passwordFields = user.password.split("$");
         const salt = passwordFields[0];
@@ -19,8 +18,8 @@ exports.validateLogin = (req, res, next) => {
             userId: user._id,
             email: user.email,
             role: user.role,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            name: user.name,
+            department: user.department,
           };
           return next();
         } else {
