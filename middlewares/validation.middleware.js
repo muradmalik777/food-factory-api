@@ -63,8 +63,8 @@ exports.validateJWT = (req, res, next) => {
       if (authorization[0] !== "Bearer") {
         return res.status(401).send(ErrorCodes.generateError(26));
       } else {
-        req.jwt = jwt.verify(authorization[1], process.env.JWT_SECRET);
-        if (req.jwt.userId) {
+        req.user = jwt.verify(authorization[1], process.env.JWT_SECRET);
+        if (req.user.userId) {
           return next();
         } else {
           res.status(400).json(ErrorCodes.generateError(25));

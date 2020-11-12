@@ -27,8 +27,7 @@ const UserSchema = new Schema({
 const UserModel = mongoose.model("users", UserSchema);
 
 exports.createUser = (data) => {
-  const user = new UserModel(data);
-  return user.save();
+  return UserModel.create(data);
 };
 
 exports.findAll = () => {

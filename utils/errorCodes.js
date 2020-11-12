@@ -1,4 +1,8 @@
 const codes = {
+  1: {
+    code: 1,
+    message: "Server error",
+  },
   20: {
     code: 20,
     message: "Invalid email or Password",
