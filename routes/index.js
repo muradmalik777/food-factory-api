@@ -23,10 +23,19 @@ router
   .route("/orders/:orderId")
   .get([ValidationMiddleware.validateJWT, OrdersController.get]);
 router
+  .route("/orders/:orderId")
+  .delete([ValidationMiddleware.validateJWT, OrdersController.get]);
+router
+  .route("/orders/:orderId")
+  .put([ValidationMiddleware.validateJWT, OrdersController.get]);
+router
   .route("/orders")
   .get([ValidationMiddleware.validateJWT, OrdersController.getAll]);
 router
-  .route("/createOrders")
+  .route("/orders/create")
+  .post([ValidationMiddleware.validateJWT, OrdersController.create]);
+router
+  .route("/orders/delete")
   .post([ValidationMiddleware.validateJWT, OrdersController.create]);
 
 module.exports = router;
