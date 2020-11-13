@@ -7,7 +7,7 @@ exports.get = (req, res) => {
       if (data) {
         res.status(200).json(data);
       } else {
-        res.status(200).json(ErrorCodes.generateError(23));
+        res.status(200).json(ErrorCodes.generateError(29));
       }
     })
     .catch((e) => {
@@ -17,12 +17,8 @@ exports.get = (req, res) => {
 
 exports.getAll = (req, res) => {
   OrdersModel.findAll(req)
-    .then((data) => {
-      if (data) {
-        res.status(200).json(data);
-      } else {
-        res.status(200).json(ErrorCodes.generateError(23));
-      }
+    .then((orders) => {
+      res.status(200).json(orders);
     })
     .catch((e) => {
       res.status(400).json(e);

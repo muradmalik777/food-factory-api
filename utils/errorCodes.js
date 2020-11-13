@@ -35,6 +35,14 @@ const codes = {
     code: 26,
     message: "User already registered!",
   },
+  28: {
+    code: 28,
+    message: "No Orders",
+  },
+  29: {
+    code: 29,
+    message: "Order not found!",
+  },
 };
 
 exports.generateError = (code) => {

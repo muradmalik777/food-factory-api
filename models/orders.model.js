@@ -6,7 +6,7 @@ const OrdersSchema = new Schema({
     type: String,
     default: "",
   },
-  purchaseOrder: {
+  purchaseOrderNumber: {
     type: String,
     default: "",
   },
@@ -106,9 +106,13 @@ const OrdersSchema = new Schema({
     type: String,
     default: "",
   },
-  orderDataa: {
+  orderData: {
     type: Array,
     default: [],
+  },
+  fulfilledStatus: {
+    type: String,
+    default: "",
   },
 });
 
