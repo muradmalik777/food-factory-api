@@ -24,7 +24,7 @@ router
   .get([ValidationMiddleware.validateJWT, OrdersController.get]);
 router
   .route("/orders/:orderId")
-  .delete([ValidationMiddleware.validateJWT, OrdersController.get]);
+  .delete([ValidationMiddleware.validateJWT, OrdersController.delete]);
 router
   .route("/orders/:orderId")
   .put([ValidationMiddleware.validateJWT, OrdersController.get]);

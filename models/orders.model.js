@@ -111,8 +111,8 @@ const OrdersSchema = new Schema({
     default: [],
   },
   fulfilledStatus: {
-    type: String,
-    default: "",
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -124,6 +124,10 @@ exports.createOrders = (data) => {
 
 exports.deleteOrders = (data) => {
   return OrdersModel.deleteMany({ _id: { $in: data } });
+};
+
+exports.deleteOrder = (orderId) => {
+  return OrdersModel.findByIdAndDelete(orderId);
 };
 
 exports.findAll = (req) => {
