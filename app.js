@@ -20,7 +20,7 @@ db.once("open", function () {
 });
 
 app.use(require("./routes"));
-app.listen(8081, () => console.log("Server running on http://localhost:8081/"));
+app.listen(8081, () => console.log("Server running on http://localhost:8082/"));
 
 // mongoose.connect('mongodb+srv://muradmalik7:muradmalik7@cluster0-kvcvl.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true});
 // const db = mongoose.connection
