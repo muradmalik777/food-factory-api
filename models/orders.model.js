@@ -122,6 +122,10 @@ exports.createOrders = (data) => {
   return OrdersModel.insertMany(data);
 };
 
+exports.deleteOrders = (data) => {
+  return OrdersModel.deleteMany({ _id: { $in: data } });
+};
+
 exports.findAll = (req) => {
   return OrdersModel.find();
 };

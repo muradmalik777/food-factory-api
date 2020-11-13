@@ -34,3 +34,13 @@ exports.create = (req, res) => {
       res.status(400).json(ErrorCodes.generateError(1));
     });
 };
+
+exports.deleteOrders = (req, res) => {
+  OrdersModel.deleteOrders(req.body.orders)
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((e) => {
+      res.status(400).json(ErrorCodes.generateError(1));
+    });
+};

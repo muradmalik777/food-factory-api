@@ -36,6 +36,6 @@ router
   .post([ValidationMiddleware.validateJWT, OrdersController.create]);
 router
   .route("/orders/delete")
-  .post([ValidationMiddleware.validateJWT, OrdersController.create]);
+  .post([ValidationMiddleware.validateJWT, OrdersController.deleteOrders]);
 
 module.exports = router;
