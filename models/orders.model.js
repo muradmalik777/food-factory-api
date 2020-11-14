@@ -98,6 +98,26 @@ const OrdersSchema = new Schema({
     type: String,
     default: "",
   },
+  truckTemperature: {
+    type: String,
+    default: "",
+  },
+  truckCondition: {
+    type: String,
+    default: "",
+  },
+  dayCodeSticker: {
+    type: String,
+    default: "",
+  },
+  vatNo: {
+    type: String,
+    default: "",
+  },
+  exemptionNo: {
+    type: String,
+    default: "",
+  },
   totalPurchaseOrderValue: {
     type: String,
     default: "",
@@ -110,7 +130,7 @@ const OrdersSchema = new Schema({
     type: Array,
     default: [],
   },
-  fulfilledStatus: {
+  fulfilled: {
     type: Boolean,
     default: false,
   },
@@ -128,6 +148,10 @@ exports.deleteOrders = (data) => {
 
 exports.deleteOrder = (orderId) => {
   return OrdersModel.findByIdAndDelete(orderId);
+};
+
+exports.updateOrder = (orderId, data) => {
+  return OrdersModel.findByIdAndUpdate(orderId, data);
 };
 
 exports.findAll = (req) => {

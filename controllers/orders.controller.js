@@ -54,3 +54,13 @@ exports.delete = (req, res) => {
       res.status(400).json(ErrorCodes.generateError(1));
     });
 };
+
+exports.update = (req, res) => {
+  OrdersModel.updateOrder(req.params.orderId, req.body.data)
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((e) => {
+      res.status(400).json(ErrorCodes.generateError(1));
+    });
+};
