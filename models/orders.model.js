@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 const Schema = mongoose.Schema;
 
 const OrdersSchema = new Schema({
@@ -58,7 +59,7 @@ const OrdersSchema = new Schema({
     type: String,
     default: "",
   },
-  truckTonditions: {
+  truckCondition: {
     type: String,
     default: "",
   },
