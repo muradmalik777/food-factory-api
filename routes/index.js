@@ -18,7 +18,6 @@ router
     UserController.create,
     AuthController.login,
   ]);
-
 router
   .route("/orders/:orderId")
   .get([ValidationMiddleware.validateJWT, OrdersController.get]);

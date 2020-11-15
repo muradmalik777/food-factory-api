@@ -154,7 +154,7 @@ exports.updateOrder = (orderId, data) => {
   return OrdersModel.findByIdAndUpdate(orderId, data);
 };
 
-exports.findAll = (req) => {
+exports.findAll = () => {
   return OrdersModel.find();
 };
 
