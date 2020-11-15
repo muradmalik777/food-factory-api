@@ -3,6 +3,14 @@ const codes = {
     code: 1,
     message: "Server error",
   },
+  10: {
+    code: 10,
+    message: "Missing required fields",
+  },
+  19: {
+    code: 19,
+    message: "Incorrect current password",
+  },
   20: {
     code: 20,
     message: "Invalid email or Password",

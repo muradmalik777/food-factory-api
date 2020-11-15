@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -54,4 +55,8 @@ exports.findById = (userId) => {
     .catch(() => {
       return null;
     });
+};
+
+exports.updateUser = (userId, data) => {
+  return UserModel.findByIdAndUpdate(userId, data);
 };

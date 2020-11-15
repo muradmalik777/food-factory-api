@@ -131,6 +131,10 @@ const OrdersSchema = new Schema({
     type: Array,
     default: [],
   },
+  companyInfo: {
+    type: Array,
+    default: [],
+  },
   fulfilled: {
     type: Boolean,
     default: false,

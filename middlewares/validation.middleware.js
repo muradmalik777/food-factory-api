@@ -54,6 +54,34 @@ exports.validateRegister = (req, res, next) => {
   }
 };
 
+exports.validateUserUpdate = (req, res, next) => {
+  if (req.body.data.email) {
+    UserModel.findByEmail(req.body.data.email).then((user) => {
+      if (req.body.data.currentPassword && req.body.data.newPassword) {
+        const userPasswordFields = user.password.split("$");
+        const salt = userPasswordFields[0];
+        const hash = crypto
+          .createHmac("sha512", salt)
+          .update(req.body.data.currentPassword)
+          .digest("base64");
+        if (hash === userPasswordFields[1]) {
+          const newHash = crypto
+            .createHmac("sha512", salt)
+            .update(req.body.data.newPassword)
+            .digest("base64");
+          req.body.data.newPassword = salt + "$" + newHash;
+          return next();
+        }
+      } else {
+        req.body.data.newPassword = user.password;
+        return next();
+      }
+    });
+  } else {
+    res.status(400).json(ErrorCodes.generateError(10));
+  }
+};
+
 exports.validateRole = (req, res, next) => {};
 
 exports.validateJWT = (req, res, next) => {

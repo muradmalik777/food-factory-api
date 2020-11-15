@@ -5,6 +5,7 @@ const ValidationMiddleware = require("../middlewares/validation.middleware");
 const AuthController = require("../controllers/auth.controller");
 const OrdersController = require("../controllers/orders.controller");
 
+// user routes
 router
   .route("/user/:userId")
   .get([ValidationMiddleware.validateJWT, UserController.get]);
@@ -19,6 +20,15 @@ router
     AuthController.login,
   ]);
 router
+  .route("/user/update/:userId")
+  .post([
+    ValidationMiddleware.validateJWT,
+    ValidationMiddleware.validateUserUpdate,
+    UserController.update,
+  ]);
+
+// Order routes
+router
   .route("/orders/:orderId")
   .get([ValidationMiddleware.validateJWT, OrdersController.get]);
 router
@@ -26,7 +36,7 @@ router
   .delete([ValidationMiddleware.validateJWT, OrdersController.delete]);
 router
   .route("/orders/:orderId")
-  .put([ValidationMiddleware.validateJWT, OrdersController.update]);
+  .post([ValidationMiddleware.validateJWT, OrdersController.update]);
 router
   .route("/orders")
   .get([ValidationMiddleware.validateJWT, OrdersController.getAll]);

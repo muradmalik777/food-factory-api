@@ -31,3 +31,19 @@ exports.create = (req, res, next) => {
       res.status(400).json(e);
     });
 };
+
+exports.update = (req, res) => {
+  const data = {
+    email: req.body.data.email,
+    name: req.body.data.name,
+    password: req.body.data.newPassword,
+  };
+  UserModel.updateUser(req.params.userId, data)
+    .then((doc) => {
+      console.log(doc);
+      res.status(200).json({ success: true });
+    })
+    .catch((e) => {
+      res.status(400).json(ErrorCodes.generateError(1));
+    });
+};
