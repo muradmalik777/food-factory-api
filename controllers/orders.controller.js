@@ -57,11 +57,12 @@ exports.delete = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  OrdersModel.updateOrder(req.params.orderId, req.body.data)
-    .then(() => {
-      res.status(200).json({ success: true });
-    })
-    .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
-    });
+  (req.body.data.updatedAt = new Date().getTime()),
+    OrdersModel.updateOrder(req.params.orderId, req.body.data)
+      .then(() => {
+        res.status(200).json({ success: true });
+      })
+      .catch((e) => {
+        res.status(500).json(ErrorCodes.generateError(1));
+      });
 };

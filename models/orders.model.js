@@ -139,6 +139,18 @@ const OrdersSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  createdAt: {
+    type: Number,
+    default: new Date().getTime(),
+  },
+  updatedAt: {
+    type: Number,
+    default: null,
+  },
+  deletedAt: {
+    type: Number,
+    default: null,
+  },
 });
 
 const OrdersModel = mongoose.model("orders", OrdersSchema);
