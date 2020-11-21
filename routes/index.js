@@ -20,8 +20,8 @@ router
     AuthController.login,
   ]);
 router
-  .route("/user/update/:userId")
-  .post([
+  .route("/user/:userId")
+  .put([
     ValidationMiddleware.validateJWT,
     ValidationMiddleware.validateUserUpdate,
     UserController.update,

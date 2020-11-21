@@ -37,6 +37,7 @@ exports.update = (req, res) => {
     email: req.body.data.email,
     name: req.body.data.name,
     password: req.body.data.newPassword,
+    updatedAt: new Date().getTime(),
   };
   UserModel.updateUser(req.params.userId, data)
     .then((doc) => {

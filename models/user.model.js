@@ -23,6 +23,26 @@ const UserSchema = new Schema({
     type: String,
     default: "storeKeeper",
   },
+  role: {
+    type: String,
+    default: "storeKeeper",
+  },
+  role: {
+    type: String,
+    default: "storeKeeper",
+  },
+  createdAt: {
+    type: Number,
+    default: new Date().getTime(),
+  },
+  updatedAt: {
+    type: Number,
+    default: null,
+  },
+  deletedAt: {
+    type: Number,
+    default: null,
+  },
 });
 
 const UserModel = mongoose.model("users", UserSchema);
