@@ -21,14 +21,3 @@ db.once("open", function () {
 
 app.use(require("./routes"));
 app.listen(8081, () => console.log("Server running on http://localhost:8081/"));
-
-// mongoose.connect('mongodb+srv://muradmalik7:muradmalik7@cluster0-kvcvl.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true});
-// const db = mongoose.connection
-
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//     console.log('Connected to MongoDB');
-// });
-
-// app.use(require('./routes'));
-// app.listen((process.env.PORT || 8081), () => console.log('Server running on http://localhost:8081/'));

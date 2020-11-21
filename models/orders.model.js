@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const OrdersSchema = new Schema({
   deliveryDate: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 0,
   },
   purchaseOrderNumber: {
     type: String,
@@ -48,8 +48,8 @@ const OrdersSchema = new Schema({
     default: "",
   },
   date: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 0,
   },
   currency: {
     type: String,

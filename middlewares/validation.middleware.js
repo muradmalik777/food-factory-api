@@ -89,19 +89,19 @@ exports.validateJWT = (req, res, next) => {
     try {
       const authorization = req.headers["authorization"].split(" ");
       if (authorization[0] !== "Bearer") {
-        return res.status(401).send(ErrorCodes.generateError(26));
+        return res.status(401).send(ErrorCodes.generateError(21));
       } else {
         req.user = jwt.verify(authorization[1], process.env.JWT_SECRET);
-        if (req.user.userId) {
+        if (req.user) {
           return next();
         } else {
-          res.status(400).json(ErrorCodes.generateError(25));
+          res.status(401).json(ErrorCodes.generateError(21));
         }
       }
     } catch (err) {
-      return res.status(403).send();
+      return res.status(401).json(ErrorCodes.generateError(21));
     }
   } else {
-    return res.status(401).send();
+    return res.status(401).json(ErrorCodes.generateError(21));
   }
 };

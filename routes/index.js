@@ -29,22 +29,22 @@ router
 
 // Order routes
 router
-  .route("/orders/:orderId")
+  .route("/order/:orderId")
   .get([ValidationMiddleware.validateJWT, OrdersController.get]);
 router
-  .route("/orders/:orderId")
+  .route("/order/:orderId")
   .delete([ValidationMiddleware.validateJWT, OrdersController.delete]);
 router
-  .route("/orders/:orderId")
-  .post([ValidationMiddleware.validateJWT, OrdersController.update]);
+  .route("/order/:orderId")
+  .put([ValidationMiddleware.validateJWT, OrdersController.update]);
 router
-  .route("/orders")
+  .route("/getOrders")
   .get([ValidationMiddleware.validateJWT, OrdersController.getAll]);
 router
-  .route("/orders/create")
+  .route("/createOrders")
   .post([ValidationMiddleware.validateJWT, OrdersController.create]);
 router
-  .route("/orders/delete")
+  .route("/deleteOrders")
   .post([ValidationMiddleware.validateJWT, OrdersController.deleteOrders]);
 
 module.exports = router;
