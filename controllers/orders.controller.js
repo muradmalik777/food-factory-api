@@ -1,5 +1,6 @@
 const OrdersModel = require("../models/orders.model");
 const ErrorCodes = require("../utils/errorCodes");
+const moment = require("moment");
 
 exports.get = (req, res) => {
   OrdersModel.findById(req.params.orderId)
@@ -26,7 +27,11 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  OrdersModel.createOrders(req.body.purchaseOrders)
+  const purchaseOrders = req.body.purchaseOrders;
+  purchaseOrders.forEach((item) => {
+    item.week = moment(new Date(item.deliveryDate)).isoWeek();
+  });
+  OrdersModel.createOrders(purchaseOrders)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -57,12 +62,12 @@ exports.delete = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  (req.body.data.updatedAt = new Date().getTime()),
-    OrdersModel.updateOrder(req.params.orderId, req.body.data)
-      .then(() => {
-        res.status(200).json({ success: true });
-      })
-      .catch((e) => {
-        res.status(500).json(ErrorCodes.generateError(1));
-      });
+  req.body.data.updatedAt = new Date().getTime();
+  OrdersModel.updateOrder(req.params.orderId, req.body.data)
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((e) => {
+      res.status(500).json(ErrorCodes.generateError(1));
+    });
 };

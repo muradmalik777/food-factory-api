@@ -92,12 +92,12 @@ const OrdersSchema = new Schema({
     default: "",
   },
   totalVAT: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 0,
   },
   totalIncVAT: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 0,
   },
   truckTemperature: {
     type: String,
@@ -120,8 +120,8 @@ const OrdersSchema = new Schema({
     default: "",
   },
   totalPurchaseOrderValue: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 0,
   },
   note: {
     type: String,
@@ -138,6 +138,10 @@ const OrdersSchema = new Schema({
   fulfilled: {
     type: Boolean,
     default: false,
+  },
+  week: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Number,
@@ -173,6 +177,10 @@ exports.updateOrder = (orderId, data) => {
 
 exports.findAll = () => {
   return OrdersModel.find();
+};
+
+exports.find = (query) => {
+  return OrdersModel.find(query);
 };
 
 exports.findById = (OrderId) => {

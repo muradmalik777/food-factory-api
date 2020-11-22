@@ -4,6 +4,7 @@ const UserController = require("../controllers/user.controller");
 const ValidationMiddleware = require("../middlewares/validation.middleware");
 const AuthController = require("../controllers/auth.controller");
 const OrdersController = require("../controllers/orders.controller");
+const StatsController = require("../controllers/stats.controller");
 
 // user routes
 router
@@ -46,5 +47,13 @@ router
 router
   .route("/deleteOrders")
   .post([ValidationMiddleware.validateJWT, OrdersController.deleteOrders]);
+
+// stats routes
+router
+  .route("/ordersWeeklyStats")
+  .get([
+    ValidationMiddleware.validateJWT,
+    StatsController.purchaseOrdersWeeklystats,
+  ]);
 
 module.exports = router;
