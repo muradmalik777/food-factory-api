@@ -17,7 +17,7 @@ exports.get = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-  OrdersModel.findAll(req)
+  OrdersModel.find({ week: req.query.week })
     .then((orders) => {
       res.status(200).json(orders);
     })
