@@ -67,13 +67,13 @@ router
 
 // machine routes
 router
-  .route("/machine/:orderId")
+  .route("/machine/:machineId")
   .get([ValidationMiddleware.validateJWT, MachineController.get]);
 router
-  .route("/machine/:orderId")
+  .route("/machine/:machineId")
   .delete([ValidationMiddleware.validateJWT, MachineController.delete]);
 router
-  .route("/machine/:orderId")
+  .route("/machine/:machineId")
   .put([ValidationMiddleware.validateJWT, MachineController.update]);
 router
   .route("/machine")
