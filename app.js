@@ -8,6 +8,8 @@ require("dotenv").config();
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use("/uploads", express.static("uploads"));
+
 mongoose.connect("mongodb://localhost:27017/foodFactory", {
   useNewUrlParser: true,
   useUnifiedTopology: true,

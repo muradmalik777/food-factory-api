@@ -8,9 +8,20 @@ const StatsController = require("../controllers/stats.controller");
 const MachineController = require("../controllers/machine.controller");
 const multer = require("multer");
 
-const upload = multer({
-  dest: "./uploads",
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    let ext = "";
+    if (file.originalname.split(".").length > 1) {
+      ext = file.originalname.substring(file.originalname.lastIndexOf("."));
+    }
+    cb(null, file.fieldname + "-" + Date.now() + ext);
+  },
 });
+
+const upload = multer({ storage: storage });
 
 // user routes
 router
@@ -45,10 +56,10 @@ router
   .route("/order/:orderId")
   .put([ValidationMiddleware.validateJWT, OrderController.update]);
 router
-  .route("/getOrders")
+  .route("/order")
   .get([ValidationMiddleware.validateJWT, OrderController.getAll]);
 router
-  .route("/createOrders")
+  .route("/order")
   .post([ValidationMiddleware.validateJWT, OrderController.create]);
 router
   .route("/deleteOrders")
@@ -65,7 +76,7 @@ router
   .route("/machine/:orderId")
   .put([ValidationMiddleware.validateJWT, MachineController.update]);
 router
-  .route("/getMachines")
+  .route("/machine")
   .get([ValidationMiddleware.validateJWT, MachineController.getAll]);
 router
   .route("/machine")

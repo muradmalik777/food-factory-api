@@ -26,7 +26,9 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  console.log(req.body);
+  if (req.file) {
+    req.body.imageUrl = `${req.file.destination}/${req.file.filename}`;
+  }
   MachineModel.createMachine(req.body)
     .then(() => {
       res.status(200).json({ success: true });
@@ -37,7 +39,7 @@ exports.create = (req, res) => {
 };
 
 exports.deleteMachines = (req, res) => {
-  MachineModel.deleteMachines(req.body.orders)
+  MachineModel.deleteMachines(req.body.machines)
     .then(() => {
       res.status(200).json({ success: true });
     })

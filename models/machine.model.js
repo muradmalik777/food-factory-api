@@ -19,7 +19,7 @@ const MachineSchema = new Schema({
     type: Number,
     default: 0,
   },
-  scheuledMaintenance: {
+  scheduledMaintenance: {
     type: Number,
     default: 0,
   },
