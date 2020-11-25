@@ -1,9 +1,8 @@
-const OrdersModel = require("../models/orders.model");
+const MachineModel = require("../models/machine.model");
 const ErrorCodes = require("../utils/errorCodes");
-const moment = require("moment");
 
 exports.get = (req, res) => {
-  OrdersModel.findById(req.params.orderId)
+  MachineModel.findById(req.params.machineId)
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -17,9 +16,9 @@ exports.get = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-  OrdersModel.find({ week: req.query.week })
-    .then((orders) => {
-      res.status(200).json(orders);
+  MachineModel.findAll()
+    .then((machines) => {
+      res.status(200).json(machines);
     })
     .catch((e) => {
       res.status(400).json(e);
@@ -27,11 +26,8 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  const purchaseOrders = req.body.purchaseOrders;
-  purchaseOrders.forEach((item) => {
-    item.week = moment(new Date(item.deliveryDate)).isoWeek();
-  });
-  OrdersModel.createOrders(purchaseOrders)
+  console.log(req.body);
+  MachineModel.createMachine(req.body)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -40,8 +36,8 @@ exports.create = (req, res) => {
     });
 };
 
-exports.deleteOrders = (req, res) => {
-  OrdersModel.deleteOrders(req.body.orders)
+exports.deleteMachines = (req, res) => {
+  MachineModel.deleteMachines(req.body.orders)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -52,7 +48,7 @@ exports.deleteOrders = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  OrdersModel.deleteOrder(req.params.orderId)
+  MachineModel.deleteMachine(req.params.machineId)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -63,7 +59,7 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  OrdersModel.updateOrder(req.params.orderId, req.body.data)
+  MachineModel.updateMachine(req.params.machineId, req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })

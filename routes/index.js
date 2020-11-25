@@ -3,8 +3,14 @@ const router = express.Router();
 const UserController = require("../controllers/user.controller");
 const ValidationMiddleware = require("../middlewares/validation.middleware");
 const AuthController = require("../controllers/auth.controller");
-const OrdersController = require("../controllers/orders.controller");
+const OrderController = require("../controllers/order.controller");
 const StatsController = require("../controllers/stats.controller");
+const MachineController = require("../controllers/machine.controller");
+const multer = require("multer");
+
+const upload = multer({
+  dest: "./uploads",
+});
 
 // user routes
 router
@@ -31,22 +37,46 @@ router
 // Order routes
 router
   .route("/order/:orderId")
-  .get([ValidationMiddleware.validateJWT, OrdersController.get]);
+  .get([ValidationMiddleware.validateJWT, OrderController.get]);
 router
   .route("/order/:orderId")
-  .delete([ValidationMiddleware.validateJWT, OrdersController.delete]);
+  .delete([ValidationMiddleware.validateJWT, OrderController.delete]);
 router
   .route("/order/:orderId")
-  .put([ValidationMiddleware.validateJWT, OrdersController.update]);
+  .put([ValidationMiddleware.validateJWT, OrderController.update]);
 router
   .route("/getOrders")
-  .get([ValidationMiddleware.validateJWT, OrdersController.getAll]);
+  .get([ValidationMiddleware.validateJWT, OrderController.getAll]);
 router
   .route("/createOrders")
-  .post([ValidationMiddleware.validateJWT, OrdersController.create]);
+  .post([ValidationMiddleware.validateJWT, OrderController.create]);
 router
   .route("/deleteOrders")
-  .post([ValidationMiddleware.validateJWT, OrdersController.deleteOrders]);
+  .post([ValidationMiddleware.validateJWT, OrderController.deleteOrders]);
+
+// machine routes
+router
+  .route("/machine/:orderId")
+  .get([ValidationMiddleware.validateJWT, MachineController.get]);
+router
+  .route("/machine/:orderId")
+  .delete([ValidationMiddleware.validateJWT, MachineController.delete]);
+router
+  .route("/machine/:orderId")
+  .put([ValidationMiddleware.validateJWT, MachineController.update]);
+router
+  .route("/getMachines")
+  .get([ValidationMiddleware.validateJWT, MachineController.getAll]);
+router
+  .route("/machine")
+  .post([
+    ValidationMiddleware.validateJWT,
+    upload.single("image"),
+    MachineController.create,
+  ]);
+router
+  .route("/deleteMachines")
+  .post([ValidationMiddleware.validateJWT, MachineController.deleteMachines]);
 
 // stats routes
 router

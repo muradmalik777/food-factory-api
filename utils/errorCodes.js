@@ -45,11 +45,11 @@ const codes = {
   },
   28: {
     code: 28,
-    message: "No Orders",
+    message: "No resource",
   },
   29: {
     code: 29,
-    message: "Order not found!",
+    message: "Resource not found!",
   },
 };
 
