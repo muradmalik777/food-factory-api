@@ -1,9 +1,9 @@
-const OrdersModel = require("../models/order.model");
+const OrderModel = require("../models/order.model");
 const ErrorCodes = require("../utils/errorCodes");
 const moment = require("moment");
 
 exports.get = (req, res) => {
-  OrdersModel.findById(req.params.orderId)
+  OrderModel.findById(req.params.orderId)
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -23,9 +23,9 @@ exports.getAll = (req, res) => {
   const skip = pageSize * (page - 1);
   console.log(pageSize);
   console.log(skip);
-  OrdersModel.count()
+  OrderModel.count()
     .then((count) => {
-      OrdersModel.find({ week: week })
+      OrderModel.find({ week: week })
         .limit(pageSize)
         .skip(skip)
         .exec()
@@ -47,7 +47,7 @@ exports.create = (req, res) => {
   purchaseOrders.forEach((item) => {
     item.week = moment(new Date(item.date)).isoWeek();
   });
-  OrdersModel.createOrders(purchaseOrders)
+  OrderModel.createOrders(purchaseOrders)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -57,7 +57,7 @@ exports.create = (req, res) => {
 };
 
 exports.deleteOrders = (req, res) => {
-  OrdersModel.deleteOrders(req.body.orders)
+  OrderModel.deleteOrders(req.body.orders)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -68,7 +68,7 @@ exports.deleteOrders = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  OrdersModel.deleteOrder(req.params.orderId)
+  OrderModel.deleteOrder(req.params.orderId)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -79,7 +79,7 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  OrdersModel.updateOrder(req.params.orderId, req.body.data)
+  OrderModel.updateOrder(req.params.orderId, req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })

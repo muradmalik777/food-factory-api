@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 const Schema = mongoose.Schema;
 
-const OrdersSchema = new Schema({
+const OrderSchema = new Schema({
   deliveryDate: {
     type: Number,
     default: 0,
@@ -157,32 +157,32 @@ const OrdersSchema = new Schema({
   },
 });
 
-const OrdersModel = mongoose.model("orders", OrdersSchema);
+const OrderModel = mongoose.model("orders", OrderSchema);
 
 exports.createOrders = (data) => {
-  return OrdersModel.insertMany(data);
+  return OrderModel.insertMany(data);
 };
 
 exports.deleteOrders = (data) => {
-  return OrdersModel.deleteMany({ _id: { $in: data } });
+  return OrderModel.deleteMany({ _id: { $in: data } });
 };
 
 exports.deleteOrder = (orderId) => {
-  return OrdersModel.findByIdAndDelete(orderId);
+  return OrderModel.findByIdAndDelete(orderId);
 };
 
 exports.updateOrder = (orderId, data) => {
-  return OrdersModel.findByIdAndUpdate(orderId, data);
+  return OrderModel.findByIdAndUpdate(orderId, data);
 };
 
 exports.find = (query = {}) => {
-  return OrdersModel.find(query);
+  return OrderModel.find(query);
 };
 
 exports.findById = (OrderId) => {
-  return OrdersModel.findById(OrderId);
+  return OrderModel.findById(OrderId);
 };
 
 exports.count = () => {
-  return OrdersModel.countDocuments();
+  return OrderModel.countDocuments();
 };

@@ -57,32 +57,32 @@ const ProductSchema = new Schema({
   },
 });
 
-const ProductsModel = mongoose.model("products", ProductSchema);
+const ProductModel = mongoose.model("products", ProductSchema);
 
 exports.createProducts = (data) => {
-  return ProductsModel.insertMany(data);
+  return ProductModel.insertMany(data);
 };
 
 exports.deleteProducts = (data) => {
-  return ProductsModel.deleteMany({ _id: { $in: data } });
+  return ProductModel.deleteMany({ _id: { $in: data } });
 };
 
 exports.deleteProduct = (machineId) => {
-  return ProductsModel.findByIdAndDelete(machineId);
+  return ProductModel.findByIdAndDelete(machineId);
 };
 
 exports.updateProduct = (machineId, data) => {
-  return ProductsModel.findByIdAndUpdate(machineId, data);
+  return ProductModel.findByIdAndUpdate(machineId, data);
 };
 
 exports.find = (query = {}) => {
-  return ProductsModel.find(query);
+  return ProductModel.find(query);
 };
 
 exports.findById = (productId) => {
-  return ProductsModel.findById(productId);
+  return ProductModel.findById(productId);
 };
 
 exports.count = () => {
-  return ProductsModel.countDocuments();
+  return ProductModel.countDocuments();
 };

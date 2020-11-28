@@ -16,9 +16,21 @@ exports.get = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-  MachineModel.findAll()
-    .then((machines) => {
-      res.status(200).json(machines);
+  const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 8;
+  const page = req.query.page ? parseInt(req.query.page) : 0;
+  const skip = pageSize * (page - 1);
+  MachineModel.count()
+    .then((count) => {
+      MachineModel.find()
+        .limit(pageSize)
+        .skip(skip)
+        .exec()
+        .then((machines) => {
+          res.status(200).json({ totalCount: count, list: machines });
+        })
+        .catch((e) => {
+          res.status(400).json(e);
+        });
     })
     .catch((e) => {
       res.status(400).json(e);

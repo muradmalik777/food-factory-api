@@ -67,21 +67,14 @@ exports.updateMachine = (machineId, data) => {
   return MachineModel.findByIdAndUpdate(machineId, data);
 };
 
-exports.findAll = () => {
-  return MachineModel.find();
-};
-
 exports.find = (query) => {
   return MachineModel.find(query);
 };
 
 exports.findById = (machineId) => {
-  return MachineModel.findById(machineId)
-    .exec()
-    .then((order) => {
-      return order;
-    })
-    .catch(() => {
-      return null;
-    });
+  return MachineModel.findById(machineId);
+};
+
+exports.count = () => {
+  return MachineModel.countDocuments();
 };
