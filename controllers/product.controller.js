@@ -26,10 +26,7 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  if (req.file) {
-    req.body.imageUrl = `${req.file.destination}/${req.file.filename}`;
-  }
-  ProductsModel.createMachine(req.body)
+  ProductsModel.createProducts(req.body.products)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -39,7 +36,7 @@ exports.create = (req, res) => {
 };
 
 exports.deleteMachines = (req, res) => {
-  ProductsModel.deleteMachines(req.body.machines)
+  ProductsModel.deleteProducts(req.body.products)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -50,7 +47,7 @@ exports.deleteMachines = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  ProductsModel.deleteMachine(req.params.machineId)
+  ProductsModel.deleteProduct(req.params.machineId)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -61,7 +58,7 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  ProductsModel.updateMachine(req.params.machineId, req.body.data)
+  ProductsModel.updateProduct(req.params.machineId, req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })

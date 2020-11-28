@@ -15,6 +15,10 @@ const ProductSchema = new Schema({
     type: String,
     default: "",
   },
+  primarySupplierCode: {
+    type: String,
+    default: "",
+  },
   secondarySupplier: {
     type: String,
     default: "",
@@ -24,6 +28,10 @@ const ProductSchema = new Schema({
     default: "",
   },
   unit: {
+    type: String,
+    default: "",
+  },
+  imageUrl: {
     type: String,
     default: "",
   },
