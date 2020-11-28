@@ -11,6 +11,10 @@ const MachineSchema = new Schema({
     type: String,
     default: "",
   },
+  description: {
+    type: String,
+    default: "",
+  },
   department: {
     type: String,
     default: "",
@@ -72,7 +76,7 @@ exports.find = (query) => {
 };
 
 exports.findById = (machineId) => {
-  return MachineModel.findOne({ _id: machineId })
+  return MachineModel.findById(machineId)
     .exec()
     .then((order) => {
       return order;

@@ -184,7 +184,7 @@ exports.find = (query) => {
 };
 
 exports.findById = (OrderId) => {
-  return OrdersModel.findOne({ _id: OrderId })
+  return OrdersModel.findById(OrderId)
     .exec()
     .then((order) => {
       return order;

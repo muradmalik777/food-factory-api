@@ -6,6 +6,7 @@ const AuthController = require("../controllers/auth.controller");
 const OrderController = require("../controllers/order.controller");
 const StatsController = require("../controllers/stats.controller");
 const MachineController = require("../controllers/machine.controller");
+const ProductController = require("../controllers/product.controller");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -56,10 +57,10 @@ router
   .route("/order/:orderId")
   .put([ValidationMiddleware.validateJWT, OrderController.update]);
 router
-  .route("/order")
+  .route("/orders")
   .get([ValidationMiddleware.validateJWT, OrderController.getAll]);
 router
-  .route("/order")
+  .route("/orders")
   .post([ValidationMiddleware.validateJWT, OrderController.create]);
 router
   .route("/deleteOrders")
@@ -76,7 +77,7 @@ router
   .route("/machine/:machineId")
   .put([ValidationMiddleware.validateJWT, MachineController.update]);
 router
-  .route("/machine")
+  .route("/machines")
   .get([ValidationMiddleware.validateJWT, MachineController.getAll]);
 router
   .route("/machine")
@@ -88,6 +89,30 @@ router
 router
   .route("/deleteMachines")
   .post([ValidationMiddleware.validateJWT, MachineController.deleteMachines]);
+
+// product routes
+router
+  .route("/product/:productId")
+  .get([ValidationMiddleware.validateJWT, ProductController.get]);
+router
+  .route("/product/:productId")
+  .delete([ValidationMiddleware.validateJWT, ProductController.delete]);
+router
+  .route("/product/:productId")
+  .put([
+    ValidationMiddleware.validateJWT,
+    upload.single("image"),
+    ProductController.update,
+  ]);
+router
+  .route("/products")
+  .get([ValidationMiddleware.validateJWT, ProductController.getAll]);
+router
+  .route("/products")
+  .post([ValidationMiddleware.validateJWT, ProductController.create]);
+router
+  .route("/deleteProducts")
+  .post([ValidationMiddleware.validateJWT, ProductController.deleteMachines]);
 
 // stats routes
 router
