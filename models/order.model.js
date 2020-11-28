@@ -175,21 +175,14 @@ exports.updateOrder = (orderId, data) => {
   return OrdersModel.findByIdAndUpdate(orderId, data);
 };
 
-exports.findAll = () => {
-  return OrdersModel.find();
-};
-
-exports.find = (query) => {
+exports.find = (query = {}) => {
   return OrdersModel.find(query);
 };
 
 exports.findById = (OrderId) => {
-  return OrdersModel.findById(OrderId)
-    .exec()
-    .then((order) => {
-      return order;
-    })
-    .catch(() => {
-      return null;
-    });
+  return OrdersModel.findById(OrderId);
+};
+
+exports.count = () => {
+  return OrdersModel.countDocuments();
 };

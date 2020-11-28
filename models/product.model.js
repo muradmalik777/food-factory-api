@@ -75,21 +75,14 @@ exports.updateProduct = (machineId, data) => {
   return ProductsModel.findByIdAndUpdate(machineId, data);
 };
 
-exports.findAll = () => {
-  return ProductsModel.find();
-};
-
-exports.find = (query) => {
+exports.find = (query = {}) => {
   return ProductsModel.find(query);
 };
 
 exports.findById = (productId) => {
-  return ProductsModel.findById(productId)
-    .exec()
-    .then((order) => {
-      return order;
-    })
-    .catch(() => {
-      return null;
-    });
+  return ProductsModel.findById(productId);
+};
+
+exports.count = () => {
+  return ProductsModel.countDocuments();
 };

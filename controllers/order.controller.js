@@ -17,9 +17,25 @@ exports.get = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-  OrdersModel.find({ week: req.query.week })
-    .then((orders) => {
-      res.status(200).json(orders);
+  const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 8;
+  const page = req.query.page ? parseInt(req.query.page) : 0;
+  const week = req.query.week ? parseInt(req.query.week) : 0;
+  const skip = pageSize * (page - 1);
+  console.log(pageSize);
+  console.log(skip);
+  OrdersModel.count()
+    .then((count) => {
+      OrdersModel.find({ week: week })
+        .limit(pageSize)
+        .skip(skip)
+        .exec()
+        .then((orders) => {
+          console.log(orders);
+          res.status(200).json({ totalCount: count, list: orders });
+        })
+        .catch((e) => {
+          res.status(400).json(e);
+        });
     })
     .catch((e) => {
       res.status(400).json(e);
