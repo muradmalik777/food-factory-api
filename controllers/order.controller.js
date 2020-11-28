@@ -29,7 +29,7 @@ exports.getAll = (req, res) => {
 exports.create = (req, res) => {
   const purchaseOrders = req.body.purchaseOrders;
   purchaseOrders.forEach((item) => {
-    item.week = moment(new Date(item.deliveryDate)).isoWeek();
+    item.week = moment(new Date(item.date)).isoWeek();
   });
   OrdersModel.createOrders(purchaseOrders)
     .then(() => {
