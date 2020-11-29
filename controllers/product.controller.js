@@ -59,7 +59,7 @@ exports.deleteMachines = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  ProductModel.deleteProduct(req.params.machineId)
+  ProductModel.deleteProduct(req.params.productId)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -70,11 +70,11 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  ProductModel.updateProduct(req.params.machineId, req.body.data)
+  ProductModel.updateProduct(req.params.productId, req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };

@@ -67,12 +67,14 @@ exports.deleteProducts = (data) => {
   return ProductModel.deleteMany({ _id: { $in: data } });
 };
 
-exports.deleteProduct = (machineId) => {
-  return ProductModel.findByIdAndDelete(machineId);
+exports.deleteProduct = (productId) => {
+  return ProductModel.findByIdAndDelete(productId);
 };
 
-exports.updateProduct = (machineId, data) => {
-  return ProductModel.findByIdAndUpdate(machineId, data);
+exports.updateProduct = (productId, data) => {
+  console.log(productId);
+  console.log(data);
+  return ProductModel.findByIdAndUpdate(productId, data);
 };
 
 exports.find = (query = {}) => {
