@@ -3,6 +3,7 @@ const ErrorCodes = require("../utils/errorCodes");
 
 exports.get = (req, res) => {
   MachineModel.findById(req.params.machineId)
+    .populate("products")
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -22,6 +23,7 @@ exports.getAll = (req, res) => {
   MachineModel.count()
     .then((count) => {
       MachineModel.find()
+        .populate({ path: "products" })
         .limit(pageSize)
         .skip(skip)
         .exec()
@@ -56,7 +58,6 @@ exports.deleteMachines = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      console.log(e);
       res.status(500).json(ErrorCodes.generateError(1));
     });
 };

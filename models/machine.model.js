@@ -58,7 +58,7 @@ const MachineSchema = new Schema({
 const MachineModel = mongoose.model("machines", MachineSchema);
 
 exports.createMachine = (data) => {
-  return MachineModel.insertMany(data);
+  return MachineModel.create(data);
 };
 
 exports.deleteMachines = (data) => {
@@ -70,6 +70,7 @@ exports.deleteMachine = (machineId) => {
 };
 
 exports.updateMachine = (machineId, data) => {
+  console.log(data);
   return MachineModel.findByIdAndUpdate(machineId, data);
 };
 
