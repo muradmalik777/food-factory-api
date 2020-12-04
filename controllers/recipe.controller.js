@@ -1,9 +1,8 @@
-const OrderModel = require("../models/order.model");
+const RecipeModel = require("../models/recipe.model");
 const ErrorCodes = require("../utils/errorCodes");
-const moment = require("moment");
 
 exports.get = (req, res) => {
-  OrderModel.findById(req.params.orderId)
+  RecipeModel.findById(req.params.recipeId)
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -19,19 +18,16 @@ exports.get = (req, res) => {
 exports.getAll = (req, res) => {
   const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 8;
   const page = req.query.page ? parseInt(req.query.page) : 0;
-  const week = req.query.week ? parseInt(req.query.week) : 0;
   const skip = pageSize * (page - 1);
-  console.log(pageSize);
-  console.log(skip);
-  OrderModel.count()
+  RecipeModel.count()
     .then((count) => {
-      OrderModel.find({ week: week })
+      RecipeModel.find()
         .limit(pageSize)
         .skip(skip)
         .exec()
-        .then((orders) => {
-          console.log(orders);
-          res.status(200).json({ totalCount: count, list: orders });
+        .then((recipies) => {
+          console.log(recipies);
+          res.status(200).json({ totalCount: count, list: recipies });
         })
         .catch((e) => {
           res.status(400).json(e);
@@ -42,12 +38,8 @@ exports.getAll = (req, res) => {
     });
 };
 
-exports.createOrders = (req, res) => {
-  const purchaseOrders = req.body.purchaseOrders;
-  purchaseOrders.forEach((item) => {
-    item.week = moment(new Date(item.date)).isoWeek();
-  });
-  OrderModel.createOrders(purchaseOrders)
+exports.createRecipies = (req, res) => {
+  RecipeModel.createRecipies(req.body.recipies)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -56,8 +48,8 @@ exports.createOrders = (req, res) => {
     });
 };
 
-exports.deleteOrders = (req, res) => {
-  OrderModel.deleteOrders(req.body.orders)
+exports.deleteRecipies = (req, res) => {
+  RecipeModel.deleteRecipies(req.body.recipies)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -68,7 +60,7 @@ exports.deleteOrders = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  OrderModel.deleteOrder(req.params.orderId)
+  RecipeModel.deleteRecipe(req.params.recipeId)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -79,7 +71,7 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  OrderModel.updateOrder(req.params.orderId, req.body.data)
+  RecipeModel.updateRecipe(req.params.recipeId, req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })

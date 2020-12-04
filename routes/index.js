@@ -7,6 +7,7 @@ const OrderController = require("../controllers/order.controller");
 const StatsController = require("../controllers/stats.controller");
 const MachineController = require("../controllers/machine.controller");
 const ProductController = require("../controllers/product.controller");
+const RecipeController = require("../controllers/recipe.controller");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -61,12 +62,12 @@ router
   .get([ValidationMiddleware.validateJWT, OrderController.getAll]);
 router
   .route("/orders")
-  .post([ValidationMiddleware.validateJWT, OrderController.create]);
+  .post([ValidationMiddleware.validateJWT, OrderController.createOrders]);
 router
   .route("/deleteOrders")
   .post([ValidationMiddleware.validateJWT, OrderController.deleteOrders]);
 
-// machine routes
+// Machine routes
 router
   .route("/machine/:machineId")
   .get([ValidationMiddleware.validateJWT, MachineController.get]);
@@ -90,7 +91,7 @@ router
   .route("/deleteMachines")
   .post([ValidationMiddleware.validateJWT, MachineController.deleteMachines]);
 
-// product routes
+// Product routes
 router
   .route("/product/:productId")
   .get([ValidationMiddleware.validateJWT, ProductController.get]);
@@ -114,7 +115,27 @@ router
   .route("/deleteProducts")
   .post([ValidationMiddleware.validateJWT, ProductController.deleteMachines]);
 
-// stats routes
+// Recipe routes
+router
+  .route("/recipe/:recipeId")
+  .get([ValidationMiddleware.validateJWT, RecipeController.get]);
+router
+  .route("/recipe/:recipeId")
+  .delete([ValidationMiddleware.validateJWT, RecipeController.delete]);
+router
+  .route("/recipe/:recipeId")
+  .put([ValidationMiddleware.validateJWT, RecipeController.update]);
+router
+  .route("/recipies")
+  .get([ValidationMiddleware.validateJWT, RecipeController.getAll]);
+router
+  .route("/recipies")
+  .post([ValidationMiddleware.validateJWT, RecipeController.createRecipies]);
+router
+  .route("/deleteRecipies")
+  .post([ValidationMiddleware.validateJWT, RecipeController.deleteRecipies]);
+
+// Stats routes
 router
   .route("/ordersWeeklyStats")
   .get([
