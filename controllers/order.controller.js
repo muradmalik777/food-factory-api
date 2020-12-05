@@ -20,7 +20,7 @@ exports.getAll = (req, res) => {
   const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 8;
   const page = req.query.page ? parseInt(req.query.page) : 0;
   const week = req.query.week ? parseInt(req.query.week) : 0;
-  const skip = pageSize * (page - 1);
+  const skip = pageSize * page;
   OrderModel.count()
     .then((count) => {
       OrderModel.find({ week: week })
