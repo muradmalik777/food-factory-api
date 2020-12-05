@@ -8,6 +8,7 @@ const StatsController = require("../controllers/stats.controller");
 const MachineController = require("../controllers/machine.controller");
 const ProductController = require("../controllers/product.controller");
 const RecipeController = require("../controllers/recipe.controller");
+const RosterController = require("../controllers/roster.controller");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -134,6 +135,26 @@ router
 router
   .route("/deleteRecipies")
   .post([ValidationMiddleware.validateJWT, RecipeController.deleteRecipies]);
+
+// Roster routes
+router
+  .route("/roster/:rosterId")
+  .get([ValidationMiddleware.validateJWT, RosterController.get]);
+router
+  .route("/roster/:rosterId")
+  .delete([ValidationMiddleware.validateJWT, RosterController.delete]);
+router
+  .route("/roster/:rosterId")
+  .put([ValidationMiddleware.validateJWT, RosterController.update]);
+router
+  .route("/rosters")
+  .get([ValidationMiddleware.validateJWT, RosterController.getAll]);
+router
+  .route("/rosters")
+  .post([ValidationMiddleware.validateJWT, RosterController.createRosters]);
+router
+  .route("/deleteRosters")
+  .post([ValidationMiddleware.validateJWT, RosterController.deleteRosters]);
 
 // Stats routes
 router

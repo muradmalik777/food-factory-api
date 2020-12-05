@@ -26,7 +26,6 @@ exports.getAll = (req, res) => {
         .skip(skip)
         .exec()
         .then((recipies) => {
-          console.log(recipies);
           res.status(200).json({ totalCount: count, list: recipies });
         })
         .catch((e) => {
@@ -54,7 +53,6 @@ exports.deleteRecipies = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      console.log(e);
       res.status(500).json(ErrorCodes.generateError(1));
     });
 };

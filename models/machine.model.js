@@ -70,7 +70,6 @@ exports.deleteMachine = (machineId) => {
 };
 
 exports.updateMachine = (machineId, data) => {
-  console.log(data);
   return MachineModel.findByIdAndUpdate(machineId, data);
 };
 

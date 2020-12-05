@@ -21,8 +21,6 @@ exports.getAll = (req, res) => {
   const page = req.query.page ? parseInt(req.query.page) : 0;
   const week = req.query.week ? parseInt(req.query.week) : 0;
   const skip = pageSize * (page - 1);
-  console.log(pageSize);
-  console.log(skip);
   OrderModel.count()
     .then((count) => {
       OrderModel.find({ week: week })
@@ -30,7 +28,6 @@ exports.getAll = (req, res) => {
         .skip(skip)
         .exec()
         .then((orders) => {
-          console.log(orders);
           res.status(200).json({ totalCount: count, list: orders });
         })
         .catch((e) => {
@@ -62,7 +59,6 @@ exports.deleteOrders = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      console.log(e);
       res.status(500).json(ErrorCodes.generateError(1));
     });
 };

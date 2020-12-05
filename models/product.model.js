@@ -72,8 +72,6 @@ exports.deleteProduct = (productId) => {
 };
 
 exports.updateProduct = (productId, data) => {
-  console.log(productId);
-  console.log(data);
   return ProductModel.findByIdAndUpdate(productId, data);
 };
 

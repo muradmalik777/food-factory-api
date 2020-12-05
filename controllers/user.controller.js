@@ -41,7 +41,6 @@ exports.update = (req, res) => {
   };
   UserModel.updateUser(req.params.userId, data)
     .then((doc) => {
-      console.log(doc);
       res.status(200).json({ success: true });
     })
     .catch((e) => {

@@ -1,8 +1,8 @@
-const ProductModel = require("../models/product.model");
+const RosterModel = require("../models/roster.model");
 const ErrorCodes = require("../utils/errorCodes");
 
 exports.get = (req, res) => {
-  ProductModel.findById(req.params.machineId)
+  RosterModel.findById(req.params.rosterId)
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -19,14 +19,14 @@ exports.getAll = (req, res) => {
   const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 8;
   const page = req.query.page ? parseInt(req.query.page) : 0;
   const skip = pageSize * (page - 1);
-  ProductModel.count()
+  RosterModel.count()
     .then((count) => {
-      ProductModel.find()
+      RosterModel.find()
         .limit(pageSize)
         .skip(skip)
         .exec()
-        .then((products) => {
-          res.status(200).json({ totalCount: count, list: products });
+        .then((rosters) => {
+          res.status(200).json({ totalCount: count, list: rosters });
         })
         .catch((e) => {
           res.status(400).json(e);
@@ -37,8 +37,8 @@ exports.getAll = (req, res) => {
     });
 };
 
-exports.create = (req, res) => {
-  ProductModel.createProducts(req.body.products)
+exports.createRosters = (req, res) => {
+  RosterModel.createRosters(req.body.rosters)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -47,8 +47,8 @@ exports.create = (req, res) => {
     });
 };
 
-exports.deleteMachines = (req, res) => {
-  ProductModel.deleteProducts(req.body.products)
+exports.deleteRosters = (req, res) => {
+  RosterModel.deleteRosters(req.body.rosters)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -58,7 +58,7 @@ exports.deleteMachines = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  ProductModel.deleteProduct(req.params.productId)
+  RosterModel.deleteRoster(req.params.rosterId)
     .then(() => {
       res.status(200).json({ success: true });
     })
@@ -69,11 +69,11 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  ProductModel.updateProduct(req.params.productId, req.body.data)
+  RosterModel.updateRoster(req.params.rosterId, req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(e);
+      res.status(500).json(ErrorCodes.generateError(1));
     });
 };
