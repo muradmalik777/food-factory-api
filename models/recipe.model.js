@@ -88,6 +88,18 @@ const RecipeSchema = new Schema({
   },
 });
 
+// const defaultItemObject = {
+//   stockNumber: "",
+//   ingredients: "",
+//   lotNumber: "",
+//   useBy: "",
+//   weightUnit: "",
+//   weightQuantity: "",
+//   constUnit: "",
+//   costTotal: "",
+//   perUnit: "",
+// };
+
 const RecipeModel = mongoose.model("recipies", RecipeSchema);
 
 exports.createRecipies = (data) => {
