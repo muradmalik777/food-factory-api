@@ -43,6 +43,10 @@ const RosterSchema = new Schema({
     type: String,
     default: "",
   },
+  week: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Number,
     default: new Date().getTime(),

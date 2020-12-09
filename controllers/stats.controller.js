@@ -1,11 +1,35 @@
 const OrderModel = require("../models/order.model");
+const RosterModel = require("../models/roster.model");
+const ProductModel = require("../models/product.model");
 const ErrorCodes = require("../utils/errorCodes");
 const helpers = require("../utils/helpers");
 
-exports.purchaseOrdersWeeklystats = (req, res) => {
+exports.ordersWeeklystats = (req, res) => {
   OrderModel.find({ week: req.query.week })
     .then((orders) => {
       const data = helpers.prepareOrderWeeklyStats(req.query.week, orders);
+      res.status(200).json(data);
+    })
+    .catch((e) => {
+      res.status(500).json(ErrorCodes.generateError(1));
+    });
+};
+
+exports.productsWeeklystats = (req, res) => {
+  OrderModel.find({ week: req.query.week })
+    .then((orders) => {
+      const data = helpers.prepareOrderWeeklyStats(req.query.week, orders);
+      res.status(200).json(data);
+    })
+    .catch((e) => {
+      res.status(500).json(ErrorCodes.generateError(1));
+    });
+};
+
+exports.rostersWeeklystats = (req, res) => {
+  RosterModel.find({ week: req.query.week })
+    .then((rosters) => {
+      const data = helpers.prepareRosterWeeklyStats(rosters);
       res.status(200).json(data);
     })
     .catch((e) => {

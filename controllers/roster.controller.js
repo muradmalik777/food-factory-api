@@ -1,5 +1,6 @@
 const RosterModel = require("../models/roster.model");
 const ErrorCodes = require("../utils/errorCodes");
+const moment = require("moment");
 
 exports.get = (req, res) => {
   RosterModel.findById(req.params.rosterId)
@@ -38,6 +39,10 @@ exports.getAll = (req, res) => {
 };
 
 exports.createRosters = (req, res) => {
+  const rosters = req.body.rosters;
+  rosters.forEach((item) => {
+    item.week = moment(new Date(item.date)).isoWeek();
+  });
   RosterModel.createRosters(req.body.rosters)
     .then(() => {
       res.status(200).json({ success: true });

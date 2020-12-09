@@ -159,9 +159,14 @@ router
 // Stats routes
 router
   .route("/ordersWeeklyStats")
-  .get([
-    ValidationMiddleware.validateJWT,
-    StatsController.purchaseOrdersWeeklystats,
-  ]);
+  .get([ValidationMiddleware.validateJWT, StatsController.ordersWeeklystats]);
+// Stats routes
+router
+  .route("/productsWeeklyStats")
+  .get([ValidationMiddleware.validateJWT, StatsController.productsWeeklystats]);
+// Stats routes
+router
+  .route("/rostersWeeklyStats")
+  .get([ValidationMiddleware.validateJWT, StatsController.rostersWeeklystats]);
 
 module.exports = router;

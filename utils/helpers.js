@@ -41,3 +41,15 @@ exports.prepareOrderWeeklyStats = (weekNumber, orders) => {
   }
   return response;
 };
+
+exports.prepareRosterWeeklyStats = (rosters) => {
+  const response = {
+    plannedHours: 0,
+    actualHours: 0,
+  };
+  rosters.forEach((item) => {
+    response.plannedHours += item.hours;
+    response.actualHours += item.hours;
+  });
+  return response;
+};
