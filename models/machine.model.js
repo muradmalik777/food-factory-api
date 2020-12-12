@@ -19,6 +19,14 @@ const MachineSchema = new Schema({
     type: String,
     default: "",
   },
+  productionPerHour: {
+    type: String,
+    default: "",
+  },
+  machineOps: {
+    type: String,
+    default: "",
+  },
   lastMaintenance: {
     type: Number,
     default: 0,
