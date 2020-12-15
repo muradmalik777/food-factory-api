@@ -3,11 +3,15 @@ mongoose.set("useFindAndModify", false);
 const Schema = mongoose.Schema;
 
 const RosterSchema = new Schema({
-  code: {
+  employeeName: {
     type: String,
     default: "",
   },
-  section: {
+  punchClockNumber: {
+    type: String,
+    default: "",
+  },
+  type: {
     type: String,
     default: "",
   },
@@ -15,33 +19,25 @@ const RosterSchema = new Schema({
     type: Number,
     default: 0,
   },
-  unit: {
-    type: String,
-    default: "",
-  },
   department: {
     type: String,
     default: "",
   },
-  company: {
+  subDepartment: {
     type: String,
     default: "",
   },
-  in: {
+  punchIn: {
     type: String,
     default: "",
   },
-  out: {
+  punchOut: {
     type: String,
     default: "",
   },
-  hours: {
+  roster: {
     type: Number,
     default: 0,
-  },
-  employee: {
-    type: String,
-    default: "",
   },
   week: {
     type: Number,

@@ -27,6 +27,10 @@ const MachineSchema = new Schema({
     type: String,
     default: "",
   },
+  unoperationalReason: {
+    type: String,
+    default: "",
+  },
   lastMaintenance: {
     type: Number,
     default: 0,
