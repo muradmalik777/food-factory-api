@@ -62,11 +62,7 @@ const RecipeSchema = new Schema({
     type: String,
     default: "",
   },
-  yieldInPCS: {
-    type: Number,
-    default: 0,
-  },
-  yieldInKG: {
+  pieces: {
     type: Number,
     default: 0,
   },
