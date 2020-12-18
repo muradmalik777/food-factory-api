@@ -38,12 +38,9 @@ exports.getAll = (req, res) => {
     });
 };
 
-exports.createRosters = (req, res) => {
-  const rosters = req.body.rosters;
-  rosters.forEach((item) => {
-    item.week = moment(new Date(item.date)).isoWeek();
-  });
-  RosterModel.createRosters(req.body.rosters)
+exports.create = (req, res) => {
+  req.body.data.week = moment(new Date(item.date)).isoWeek();
+  RosterModel.createRoster(req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
     })

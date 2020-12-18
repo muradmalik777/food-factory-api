@@ -47,7 +47,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.deleteMachines = (req, res) => {
+exports.deleteProducts = (req, res) => {
   ProductModel.deleteProducts(req.body.products)
     .then(() => {
       res.status(200).json({ success: true });

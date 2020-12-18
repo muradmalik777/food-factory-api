@@ -59,8 +59,8 @@ const RosterSchema = new Schema({
 
 const RosterModel = mongoose.model("rosters", RosterSchema);
 
-exports.createRosters = (data) => {
-  return RosterModel.insertMany(data);
+exports.createRoster = (data) => {
+  return RosterModel.create(data);
 };
 
 exports.deleteRosters = (data) => {

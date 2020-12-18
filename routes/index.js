@@ -114,7 +114,7 @@ router
   .post([ValidationMiddleware.validateJWT, ProductController.create]);
 router
   .route("/deleteProducts")
-  .post([ValidationMiddleware.validateJWT, ProductController.deleteMachines]);
+  .post([ValidationMiddleware.validateJWT, ProductController.deleteProducts]);
 
 // Recipe routes
 router
@@ -150,8 +150,8 @@ router
   .route("/rosters")
   .get([ValidationMiddleware.validateJWT, RosterController.getAll]);
 router
-  .route("/rosters")
-  .post([ValidationMiddleware.validateJWT, RosterController.createRosters]);
+  .route("/roster")
+  .post([ValidationMiddleware.validateJWT, RosterController.create]);
 router
   .route("/deleteRosters")
   .post([ValidationMiddleware.validateJWT, RosterController.deleteRosters]);
