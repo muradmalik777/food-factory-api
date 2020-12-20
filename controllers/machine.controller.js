@@ -1,4 +1,5 @@
 const MachineModel = require("../models/machine.model");
+const UsserModel = require("../models/user.model");
 const ErrorCodes = require("../utils/errorCodes");
 const Helpers = require("../utils/helpers");
 const Mailer = require("../services/mailer");
@@ -86,12 +87,8 @@ exports.update = (req, res) => {
     }
     MachineModel.updateMachine(req.params.machineId, req.body.data)
       .then((newMachine) => {
-        const message = Helpers.prepareMachineNotificationEmail(
-          req.user.email,
-          newMachine
-        );
         if (notify) {
-          Mailer.sendEmail(message);
+          sendMailToAdmins(newMachine);
         }
         res.status(200).json({ success: true });
       })
@@ -99,5 +96,17 @@ exports.update = (req, res) => {
         console.log(e);
         res.status(500).json(e);
       });
+  });
+};
+
+const sendMailToAdmins = (machine) => {
+  UsserModel.getAllAdmins().then((admins) => {
+    admins.forEach((admin) => {
+      const message = Helpers.prepareMachineNotificationEmail(
+        admin.email,
+        machine
+      );
+      Mailer.sendEmail(message);
+    });
   });
 };

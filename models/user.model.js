@@ -84,3 +84,7 @@ exports.updateUser = (userId, data) => {
 exports.count = () => {
   return UserModel.countDocuments();
 };
+
+exports.getAllAdmins = () => {
+  return UserModel.find({ role: "admin" });
+};
