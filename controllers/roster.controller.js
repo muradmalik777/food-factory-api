@@ -1,5 +1,5 @@
 const RosterModel = require("../models/roster.model");
-const ErrorCodes = require("../utils/errorCodes");
+const ErrorCodes = require("../services/errorCodes");
 const moment = require("moment");
 
 exports.get = (req, res) => {

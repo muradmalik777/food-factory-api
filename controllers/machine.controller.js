@@ -1,5 +1,5 @@
 const MachineModel = require("../models/machine.model");
-const ErrorCodes = require("../utils/errorCodes");
+const ErrorCodes = require("../services/errorCodes");
 
 exports.get = (req, res) => {
   MachineModel.findById(req.params.machineId)

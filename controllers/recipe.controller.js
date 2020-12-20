@@ -1,5 +1,5 @@
 const RecipeModel = require("../models/recipe.model");
-const ErrorCodes = require("../utils/errorCodes");
+const ErrorCodes = require("../services/errorCodes");
 
 exports.get = (req, res) => {
   RecipeModel.findById(req.params.recipeId)

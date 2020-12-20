@@ -1,5 +1,5 @@
 const UserModel = require("../models/user.model");
-const ErrorCodes = require("../utils/errorCodes");
+const ErrorCodes = require("../services/errorCodes");
 
 exports.get = (req, res) => {
   UserModel.findById(req.params.userId)
