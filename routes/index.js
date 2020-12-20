@@ -28,18 +28,28 @@ const upload = multer({ storage: storage });
 
 // user routes
 router
-  .route("/user/:userId")
-  .get([ValidationMiddleware.validateJWT, UserController.get]);
-router
   .route("/login")
   .post([ValidationMiddleware.validateLogin, AuthController.login]);
 router
-  .route("/register")
+  .route("/user/:userId")
+  .get([ValidationMiddleware.validateJWT, UserController.get]);
+router
+  .route("/users")
+  .get([ValidationMiddleware.validateJWT, UserController.getAll]);
+router
+  .route("/user")
   .post([
-    ValidationMiddleware.validateRegister,
-    UserController.create,
-    AuthController.login,
+    ValidationMiddleware.validateJWT,
+    ValidationMiddleware.validateUserCreation,
+    UserController.addUser,
   ]);
+// router
+//   .route("/register")
+//   .post([
+//     ValidationMiddleware.validateUserCreation,
+//     UserController.create,
+//     AuthController.login,
+//   ]);
 router
   .route("/user/:userId")
   .put([

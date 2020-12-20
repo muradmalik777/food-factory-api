@@ -15,6 +15,28 @@ exports.get = (req, res) => {
     });
 };
 
+exports.getAll = (req, res) => {
+  const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 25;
+  const page = req.query.page ? parseInt(req.query.page) : 0;
+  const skip = pageSize * page;
+  UserModel.count()
+    .then((count) => {
+      UserModel.find()
+        .limit(pageSize)
+        .skip(skip)
+        .exec()
+        .then((users) => {
+          res.status(200).json({ totalCount: count, list: users });
+        })
+        .catch((e) => {
+          res.status(400).json(e);
+        });
+    })
+    .catch((e) => {
+      res.status(400).json(e);
+    });
+};
+
 exports.create = (req, res, next) => {
   UserModel.createUser(req.body)
     .then((user) => {
@@ -26,6 +48,16 @@ exports.create = (req, res, next) => {
         department: user.department,
       };
       return next();
+    })
+    .catch((e) => {
+      res.status(400).json(e);
+    });
+};
+
+exports.addUser = (req, res) => {
+  UserModel.createUser(req.body)
+    .then(() => {
+      res.status(200).json({ success: true });
     })
     .catch((e) => {
       res.status(400).json(e);

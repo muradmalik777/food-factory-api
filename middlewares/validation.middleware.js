@@ -34,7 +34,7 @@ exports.validateLogin = (req, res, next) => {
   }
 };
 
-exports.validateRegister = (req, res, next) => {
+exports.validateUserCreation = (req, res, next) => {
   if (req.body.email && req.body.password) {
     UserModel.findByEmail(req.body.email).then((user) => {
       if (user) {

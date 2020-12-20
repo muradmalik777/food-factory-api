@@ -51,8 +51,8 @@ exports.createUser = (data) => {
   return UserModel.create(data);
 };
 
-exports.findAll = () => {
-  return UserModel.find();
+exports.find = (query = {}) => {
+  return UserModel.find(query);
 };
 
 exports.findByEmail = (email) => {
@@ -79,4 +79,8 @@ exports.findById = (userId) => {
 
 exports.updateUser = (userId, data) => {
   return UserModel.findByIdAndUpdate(userId, data);
+};
+
+exports.count = () => {
+  return UserModel.countDocuments();
 };
