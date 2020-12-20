@@ -90,8 +90,9 @@ exports.update = (req, res) => {
           req.user.email,
           newMachine
         );
-        console.log(message);
-        Mailer.sendEmail(message);
+        if (notify) {
+          Mailer.sendEmail(message);
+        }
         res.status(200).json({ success: true });
       })
       .catch((e) => {
