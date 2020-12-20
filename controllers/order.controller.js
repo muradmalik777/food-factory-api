@@ -1,5 +1,5 @@
 const OrderModel = require("../models/order.model");
-const ErrorCodes = require("../services/errorCodes");
+const ErrorCodes = require("../utils/errorCodes");
 const moment = require("moment");
 
 exports.get = (req, res) => {

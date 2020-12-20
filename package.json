@@ -8,6 +8,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.0",

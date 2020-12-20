@@ -1,7 +1,7 @@
 const UserModel = require("../models/user.model");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const ErrorCodes = require("../services/errorCodes");
+const ErrorCodes = require("../utils/errorCodes");
 
 exports.validateLogin = (req, res, next) => {
   if (req.body.email && req.body.password) {

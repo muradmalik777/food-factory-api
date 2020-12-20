@@ -1,5 +1,7 @@
 const MachineModel = require("../models/machine.model");
-const ErrorCodes = require("../services/errorCodes");
+const ErrorCodes = require("../utils/errorCodes");
+const Helpers = require("../utils/helpers");
+const Mailer = require("../services/mailer");
 
 exports.get = (req, res) => {
   MachineModel.findById(req.params.machineId)
@@ -74,11 +76,27 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   req.body.data.updatedAt = new Date().getTime();
-  MachineModel.updateMachine(req.params.machineId, req.body.data)
-    .then(() => {
-      res.status(200).json({ success: true });
-    })
-    .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
-    });
+  let notify = false;
+  MachineModel.findById(req.params.machineId).then((oldMachine) => {
+    if (
+      oldMachine.operational !== req.body.data.operational &&
+      req.body.data.operational === "no"
+    ) {
+      notify = true;
+    }
+    MachineModel.updateMachine(req.params.machineId, req.body.data)
+      .then((newMachine) => {
+        const message = Helpers.prepareMachineNotificationEmail(
+          req.user.email,
+          newMachine
+        );
+        console.log(message);
+        Mailer.sendEmail(message);
+        res.status(200).json({ success: true });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.status(500).json(e);
+      });
+  });
 };

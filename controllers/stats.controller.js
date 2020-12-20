@@ -1,8 +1,8 @@
 const OrderModel = require("../models/order.model");
 const RosterModel = require("../models/roster.model");
 const ProductModel = require("../models/product.model");
-const ErrorCodes = require("../services/errorCodes");
-const helpers = require("../services/helpers");
+const ErrorCodes = require("../utils/errorCodes");
+const helpers = require("../utils/helpers");
 const moment = require("moment");
 
 exports.ordersWeeklystats = (req, res) => {

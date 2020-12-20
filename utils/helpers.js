@@ -53,3 +53,19 @@ exports.prepareRosterWeeklyStats = (rosters) => {
   });
   return response;
 };
+
+exports.prepareMachineNotificationEmail = (to, machine) => {
+  const text =
+    "One of you machine has been marked as unoperational, below are the details!" +
+    "\n";
+  const html = `<p>Machine Name: <b>${machine.machineName}</b></p> \n
+  <p>Machine Number: <b>${machine.machineNumber}</b></p> \n
+  <p>Reason: <b>${machine.unoperationalReason}</b></p> \n
+  `;
+  return {
+    to: to,
+    subject: "Machine Marked as Unoperational!",
+    text: text,
+    html: html,
+  };
+};
