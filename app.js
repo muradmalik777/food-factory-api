@@ -22,20 +22,40 @@ db.once("open", function () {
 });
 
 const addDefaultAdmin = () => {
-  const userData = {
-    name: "Admin",
-    email: "muradmalik7@gmail.com",
-    password:
-      "xRjpfPkdiq8mqqV7h5o4cQ==$21Q5pe61VKKNpsU9oc1cF7F00kksXkgWRKJ7D4ZRdXbnOmgkxQheHB2f4nm+Lzq7lG1BpWzeNPNIeICl9a9ydg==",
-    department: "butcher",
-    role: "admin",
-  };
+  const users = [
+    {
+      name: "Admin",
+      email: "muradmalik7@gmail.com",
+      password:
+        "xRjpfPkdiq8mqqV7h5o4cQ==$21Q5pe61VKKNpsU9oc1cF7F00kksXkgWRKJ7D4ZRdXbnOmgkxQheHB2f4nm+Lzq7lG1BpWzeNPNIeICl9a9ydg==",
+      department: "butcher",
+      role: "admin",
+    },
+    {
+      name: "Admin",
+      email: "jurgenbarbara@thefoodfactory.com.mt",
+      password:
+        "xRjpfPkdiq8mqqV7h5o4cQ==$21Q5pe61VKKNpsU9oc1cF7F00kksXkgWRKJ7D4ZRdXbnOmgkxQheHB2f4nm+Lzq7lG1BpWzeNPNIeICl9a9ydg==",
+      department: "butcher",
+      role: "admin",
+    },
+    {
+      name: "Admin",
+      email: "info@lanemo.co",
+      password:
+        "xRjpfPkdiq8mqqV7h5o4cQ==$21Q5pe61VKKNpsU9oc1cF7F00kksXkgWRKJ7D4ZRdXbnOmgkxQheHB2f4nm+Lzq7lG1BpWzeNPNIeICl9a9ydg==",
+      department: "butcher",
+      role: "admin",
+    },
+  ];
 
   const UserModel = require("./models/user.model");
-  UserModel.findByEmail(userData.email).then((userInDB) => {
-    if (!userInDB) {
-      UserModel.createUser(userData);
-    }
+  users.forEach((user) => {
+    UserModel.findByEmail(user.email).then((userInDB) => {
+      if (!userInDB) {
+        UserModel.createUser(user);
+      }
+    });
   });
 };
 
