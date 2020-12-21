@@ -39,6 +39,10 @@ const RosterSchema = new Schema({
     type: Number,
     default: 0,
   },
+  day: {
+    type: Number,
+    default: 1,
+  },
   week: {
     type: Number,
     default: 0,
@@ -83,6 +87,6 @@ exports.findById = (rosterId) => {
   return RosterModel.findById(rosterId);
 };
 
-exports.count = () => {
-  return RosterModel.countDocuments();
+exports.count = (query = {}) => {
+  return RosterModel.countDocuments(query);
 };

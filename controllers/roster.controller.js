@@ -17,13 +17,18 @@ exports.get = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-  const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 8;
+  const pageSize = 5;
   const page = req.query.page ? parseInt(req.query.page) : 0;
+  const department = req.query.department ? req.query.department : "";
+  const week = req.query.week ? req.query.week : 0;
+  const day = req.query.day ? req.query.day : 0;
   const skip = pageSize * page;
-  RosterModel.count()
+  console.log(page);
+  console.log(skip);
+  RosterModel.count({ department: department, week: week })
     .then((count) => {
-      RosterModel.find()
-        .limit(pageSize)
+      RosterModel.find({ department: department, week: week, day: day })
+        .limit(5)
         .skip(skip)
         .exec()
         .then((rosters) => {
@@ -39,7 +44,8 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  req.body.data.week = moment(new Date(item.date)).isoWeek();
+  req.body.data.week = moment(new Date(req.body.data.date)).week();
+  req.body.data.day = moment(new Date(req.body.data.date)).day();
   RosterModel.createRoster(req.body.data)
     .then(() => {
       res.status(200).json({ success: true });
