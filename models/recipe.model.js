@@ -3,17 +3,6 @@ mongoose.set("useFindAndModify", false);
 const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema({
-  cookingLoss: {
-    type: Object,
-    default: {
-      percentage: 0,
-      value: 0,
-    },
-  },
-  costPerKG: {
-    type: Number,
-    default: 0,
-  },
   costingBy: {
     type: String,
     default: "",
@@ -30,14 +19,6 @@ const RecipeSchema = new Schema({
     type: String,
     default: "",
   },
-  department: {
-    type: String,
-    default: "",
-  },
-  netYield: {
-    type: Number,
-    default: 0,
-  },
   preparedBy: {
     type: String,
     default: "",
@@ -50,14 +31,6 @@ const RecipeSchema = new Schema({
     type: String,
     default: "",
   },
-  totalCost: {
-    type: Number,
-    default: 0,
-  },
-  totalYield: {
-    type: Number,
-    default: 0,
-  },
   v2: {
     type: String,
     default: "",
@@ -66,7 +39,11 @@ const RecipeSchema = new Schema({
     type: Number,
     default: 0,
   },
-  contract: {
+  portion: {
+    type: Number,
+    default: 0,
+  },
+  preparationOfRecipeBy: {
     type: String,
     default: "",
   },

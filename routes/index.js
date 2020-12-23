@@ -148,7 +148,7 @@ router
 
 // Roster routes
 router
-  .route("/roster/:rosterId")
+  .route("/roster")
   .get([ValidationMiddleware.validateJWT, RosterController.get]);
 router
   .route("/roster/:rosterId")
@@ -156,9 +156,6 @@ router
 router
   .route("/roster/:rosterId")
   .put([ValidationMiddleware.validateJWT, RosterController.update]);
-router
-  .route("/rosters")
-  .get([ValidationMiddleware.validateJWT, RosterController.getAll]);
 router
   .route("/roster")
   .post([ValidationMiddleware.validateJWT, RosterController.create]);

@@ -3,42 +3,6 @@ mongoose.set("useFindAndModify", false);
 const Schema = mongoose.Schema;
 
 const RosterSchema = new Schema({
-  employeeName: {
-    type: String,
-    default: "",
-  },
-  punchClockNumber: {
-    type: String,
-    default: "",
-  },
-  type: {
-    type: String,
-    default: "",
-  },
-  date: {
-    type: Number,
-    default: 0,
-  },
-  department: {
-    type: String,
-    default: "",
-  },
-  subDepartment: {
-    type: String,
-    default: "",
-  },
-  punchIn: {
-    type: String,
-    default: "",
-  },
-  punchOut: {
-    type: String,
-    default: "",
-  },
-  roster: {
-    type: Number,
-    default: 0,
-  },
   day: {
     type: Number,
     default: 1,
@@ -46,6 +10,14 @@ const RosterSchema = new Schema({
   week: {
     type: Number,
     default: 0,
+  },
+  items: {
+    type: Array,
+    default: [],
+  },
+  department: {
+    type: String,
+    default: "",
   },
   createdAt: {
     type: Number,
@@ -83,8 +55,8 @@ exports.find = (query = {}) => {
   return RosterModel.find(query);
 };
 
-exports.findById = (rosterId) => {
-  return RosterModel.findById(rosterId);
+exports.findOne = (query = {}) => {
+  return RosterModel.findOne(query);
 };
 
 exports.count = (query = {}) => {
