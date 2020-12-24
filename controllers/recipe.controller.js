@@ -7,7 +7,7 @@ exports.get = (req, res) => {
       if (data) {
         res.status(200).json(data);
       } else {
-        res.status(200).json(ErrorCodes.generateError(29));
+        res.status(200).json(e);
       }
     })
     .catch((e) => {
@@ -37,13 +37,23 @@ exports.getAll = (req, res) => {
     });
 };
 
+exports.create = (req, res) => {
+  RecipeModel.create(req.body.data)
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((e) => {
+      res.status(500).json(e);
+    });
+};
+
 exports.createRecipies = (req, res) => {
   RecipeModel.createRecipies(req.body.recipies)
     .then(() => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };
 
@@ -53,7 +63,7 @@ exports.deleteRecipies = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };
 
@@ -63,7 +73,7 @@ exports.delete = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };
 
@@ -74,6 +84,6 @@ exports.update = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };

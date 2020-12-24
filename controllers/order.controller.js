@@ -49,7 +49,7 @@ exports.createOrders = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };
 
@@ -59,7 +59,7 @@ exports.deleteOrders = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };
 
@@ -69,7 +69,7 @@ exports.delete = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };
 
@@ -80,6 +80,6 @@ exports.update = (req, res) => {
       res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(500).json(ErrorCodes.generateError(1));
+      res.status(500).json(e);
     });
 };

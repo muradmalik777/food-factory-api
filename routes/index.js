@@ -140,6 +140,9 @@ router
   .route("/recipies")
   .get([ValidationMiddleware.validateJWT, RecipeController.getAll]);
 router
+  .route("/recipe")
+  .post([ValidationMiddleware.validateJWT, RecipeController.create]);
+router
   .route("/recipies")
   .post([ValidationMiddleware.validateJWT, RecipeController.createRecipies]);
 router

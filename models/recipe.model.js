@@ -75,6 +75,10 @@ const RecipeSchema = new Schema({
 
 const RecipeModel = mongoose.model("recipies", RecipeSchema);
 
+exports.create = (data) => {
+  return RecipeModel.create(data);
+};
+
 exports.createRecipies = (data) => {
   return RecipeModel.insertMany(data);
 };
