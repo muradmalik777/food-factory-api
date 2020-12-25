@@ -47,12 +47,10 @@ const MachineSchema = new Schema({
     type: String,
     default: "",
   },
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "products",
-    },
-  ],
+  products: {
+    type: Array,
+    default: [],
+  },
   createdAt: {
     type: Number,
     default: new Date().getTime(),

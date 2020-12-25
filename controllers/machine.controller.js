@@ -6,7 +6,6 @@ const Mailer = require("../services/mailer");
 
 exports.get = (req, res) => {
   MachineModel.findById(req.params.machineId)
-    .populate("products")
     .then((data) => {
       if (data) {
         res.status(200).json(data);
