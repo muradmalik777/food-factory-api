@@ -7,7 +7,7 @@ exports.sendEmail = (payload) => {
   }
   const msg = {
     to: payload.to,
-    from: "no-reply@ffoperations.com",
+    from: "info@lanemo.co",
     subject: payload.subject,
     text: payload.text,
     html: payload.html,
